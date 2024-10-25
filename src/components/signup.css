@@ -1,0 +1,52 @@
+.seller-signup-div{
+ display: flex;
+}
+
+.seller-signup-div-left{
+    width: 50%;
+    background-color: #e3f2fe;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.seller-signup-div-left form{
+    background-color: #1464c0;
+    width: 23rem;
+    padding: 1.5rem 0.5rem;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 2.2rem;
+}
+
+.seller-signup-form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.seller-signup-form input{
+    width: 19rem;
+    padding: 5px;
+    border: none;
+    border-radius: 5px;
+}
+
+.seller-signup-form button{
+    width: 50%;
+    padding: 6px;
+    background-color: white;
+    color: #1464c0;
+    font-weight: 600;
+    border: none;
+    border-radius: 5px;
+}
+
+.seller-signup-form a{
+    color: white;
+}
+
