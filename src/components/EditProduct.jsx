@@ -21,6 +21,12 @@ export default function EditProduct() {
   const { user, prod } = location.state || {};
 
   useEffect(() => {
+    const token = Cookies.get("jwt");
+    if (!token) {
+      navigate('/');
+    }
+  }, [navigate]);
+  useEffect(() => {
     // Populate form data if product details (prod) are passed in
     if (prod) {
       setProdId(prod._id);

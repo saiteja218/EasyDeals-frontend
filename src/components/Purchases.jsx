@@ -6,7 +6,7 @@ import './purchase.css'
 const client = algoliasearch('VQ3KJTIQVD', '7d7685118964f54246dfe39c99e02615');
 const index = client.initIndex('orders');
 const index2 = client.initIndex('products');
-
+import Cookies from 'js-cookie';
 
 export default function Purchases() {
     const location = useLocation();
@@ -14,6 +14,14 @@ export default function Purchases() {
     // console.log(buyerData)
     const [orders, setOrders] = useState([]);
     const [productsMap, setProductsMap] = useState({});
+
+    useEffect(() => {
+        const token = Cookies.get("jwt");
+        if (!token) {
+          navigate('/');
+        }
+      }, [navigate]);
+
     useEffect(() => {
         async function getData() {
             const filters = `customer:"${buyerData._id}"`

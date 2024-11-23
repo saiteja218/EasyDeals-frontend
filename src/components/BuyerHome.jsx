@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import '../App.css';
 import "./buyer.css"
 import Carousel from 'react-bootstrap/Carousel';
@@ -7,15 +7,21 @@ import Col from 'react-bootstrap/Col'
 import p1 from "../assets/person1.png"
 import p2 from "../assets/person2.png"
 import p3 from "../assets/person3.png"
-
+import Cookies from 'js-cookie';
 import { useNavigate,useLocation } from 'react-router-dom';
 import Navbar2 from './Navbar2';
+
 
 function BuyerHome(){
     const navigate=useNavigate();
     const location=useLocation();
     const {buyerData}=location.state||"null";
-
+    useEffect(() => {
+        const token = Cookies.get("jwt");
+        if (!token) {
+          navigate('/');
+        }
+      }, [navigate]);
     function handleBrowserBtn(){
         
         navigate('/products',{state:{buyerData}})

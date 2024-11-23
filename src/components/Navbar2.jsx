@@ -1,33 +1,56 @@
-import React from 'react'
-import './Home.css'     
-import logo from '../assets/logo.png'
-import { useNavigate } from 'react-router-dom'
+import React, { useEffect } from 'react';
+import './Home.css';     
+import logo from '../assets/logo.png';
+import { useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
 
-export default function Navbar2({data}) {
-    // console.log(data)
-    const navigate=useNavigate();
-  return (
-    <div style={{padding:"0.5rem 3rem"}}className='navbar'>
+export default function Navbar2({ data }) {
+    const navigate = useNavigate();
 
-        <div className='navbar-left'>
-            <div>
-                <img src={logo} alt="logo" width={50} height={50}  onClick={()=>{navigate('/')}} style={{cursor:"pointer"}}/>
-            </div>
-            <div>
-                 <h2 onClick={()=>{navigate('/')}} style={{cursor:"pointer"}}>EasyDeals</h2>
-            </div>
-        </div>
+    useEffect(() => {
+        const token = Cookies.get("jwt");
+        if (!token) { 
+            navigate('/');
+        }
+    }, [navigate]);
 
-        <div className='navbar-right'>
-            <div>
-                <p>Hello, {data.name}</p>
-            </div>
-            <div>
-                <button style={{border:"none"}}>Logout</button>
-            </div>
-        </div>
+    // Function to handle logout
+    const handleLogout = () => {
+        // Delete the JWT cookie
+        Cookies.remove('jwt');  // Replace 'jwt' with the actual name of your JWT cookie
+        // Navigate to home page
+        navigate('/');
+    };
 
-      
-    </div>
-  )
+    // Render navbar only if data is available
+    return (
+        data ? (
+            <div style={{ padding: "0.5rem 3rem" }} className='navbar'>
+                <div className='navbar-left'>
+                    <div>
+                        <img 
+                            src={logo} 
+                            alt="logo" 
+                            width={50} 
+                            height={50}  
+                            onClick={() => { navigate('/'); }} 
+                            style={{ cursor: "pointer" }} 
+                        />
+                    </div>
+                    <div>
+                        <h2 onClick={() => { navigate('/'); }} style={{ cursor: "pointer" }}>EasyDeals</h2>
+                    </div>
+                </div>
+
+                <div className='navbar-right'>
+                    <div>
+                        <p>Hello, {data.name}</p>
+                    </div>
+                    <div>
+                        <button style={{ border: "none" }} onClick={handleLogout}>Logout</button>
+                    </div>
+                </div>
+            </div>
+        ) : null // This ensures nothing is rendered if data is not available
+    );
 }

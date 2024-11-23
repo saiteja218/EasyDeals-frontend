@@ -16,7 +16,7 @@ export default function SellerProducts() {
 
     useEffect(() => {
         const token = Cookies.get("jwt");
-        if (!token) {
+        if (!token) { 
             navigate('/');
         }
     }, [navigate])

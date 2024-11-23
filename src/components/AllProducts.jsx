@@ -5,7 +5,7 @@ import Navbar from './Navbar2';
 import "../styles/allproducts.css"
 import algoliasearch from 'algoliasearch'; // Correct import statement
 import { useNavigate } from 'react-router-dom';
-
+import Cookies from 'js-cookie';
 const client = algoliasearch('VQ3KJTIQVD', '7d7685118964f54246dfe39c99e02615');
 const index = client.initIndex('products');
 
@@ -24,6 +24,12 @@ export default function AllProducts() {
   const [cartVisible, setCartVisible] = useState(false);
 
 
+  useEffect(() => {
+    const token = Cookies.get("jwt");
+    if (!token) {
+      navigate('/');
+    }
+  }, [navigate]);
   useEffect(() => {
     async function getProd() {
       try {
@@ -266,8 +272,9 @@ export default function AllProducts() {
         <div className='all-products'>
           <div className='prods '>
             {/* hello */}
-            {
+            {products?
               products.map((product, index) => {
+                
                 const isInCart = cart.includes(product.objectID);
                 // console.log(cart.length)
                 return (
@@ -292,7 +299,7 @@ export default function AllProducts() {
                     </div>
                   </div>
                 )
-              })
+              }):<p>Loading...</p>
             }
           </div>
         </div>
