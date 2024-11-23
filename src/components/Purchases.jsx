@@ -72,7 +72,7 @@ export default function Purchases() {
                                             sum += prod.price;
                                             return (
                                                 <div key={index2} className='product'>
-                                                    <img src={`http://localhost:5000/${prod.image}`} alt="" width="150" height="150" />
+                                                    <img src={`https://easydeals-backend.onrender.com/${prod.image}`} alt="" width="150" height="150" />
                                                     <p>{prod.name}</p>
 
                                                 </div>

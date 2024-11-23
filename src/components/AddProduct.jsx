@@ -46,7 +46,7 @@ export default function AddProduct() {
     formData.append('seller', id);
 
     try {
-      const res = await axios.post('http://localhost:5000/seller/products/add-products', formData, {
+      const res = await axios.post('https://easydeals-backend.onrender.com/seller/products/add-products', formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
         withCredentials: true,
       });

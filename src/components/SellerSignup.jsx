@@ -14,7 +14,7 @@ function SellerSignup() {
     async function handleSubmit(e) {
         e.preventDefault();
         try {
-            const res = await axios.post('http://localhost:5000/seller/user/register', {
+            const res = await axios.post('https://easydeals-backend.onrender.com/seller/user/register', {
                 name, email, password
             }, { withCredentials: true })
             alert("new user added");

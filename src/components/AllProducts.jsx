@@ -55,7 +55,7 @@ export default function AllProducts() {
       }
 
       try {
-        const response = await axios.get("http://localhost:5000/seller/products/get-categories");
+        const response = await axios.get("https://easydeals-backend.onrender.com/seller/products/get-categories");
         // console.log(response.data.categories)
 
         setCategories(response.data.categories)
@@ -280,7 +280,7 @@ export default function AllProducts() {
                 return (
                   <div className='product-card card' key={index}>
                     <div>
-                      <img src={`http://localhost:5000/${product.image}`} width="150" height="150" />
+                      <img src={`https://easydeals-backend.onrender.com/${product.image}`} width="150" height="150" />
                     </div>
                     <div className='product-title'>
                       {product.name}

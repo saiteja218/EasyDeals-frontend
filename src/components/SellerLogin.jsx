@@ -14,7 +14,7 @@ function SellerLogin(){
       e.preventDefault();
         
         try {
-            const res= await axios.post('http://localhost:5000/seller/user/login',{
+            const res= await axios.post('https://easydeals-backend.onrender.com/seller/user/login',{
                 email,password
             },{withCredentials:true})
             alert(res.data.message);

@@ -23,7 +23,7 @@ export default function SellerProducts() {
     // console.log(id)
     useEffect(() => {
         async function getproducts() {
-            let productdata = await axios.get(`http://localhost:5000/seller/products/get-seller-products/${id}`, { withCredentials: true });
+            let productdata = await axios.get(`https://easydeals-backend.onrender.com/seller/products/get-seller-products/${id}`, { withCredentials: true });
             // data-data.data;
             // console.log(productdata.data.sellerProducts);
 
@@ -41,7 +41,7 @@ export default function SellerProducts() {
     async function handleDelete(id) {
 
         try {
-            await axios.delete(`http://localhost:5000/seller/products/delete-product/${id}`, { withCredentials: true })
+            await axios.delete(`https://easydeals-backend.onrender.com/seller/products/delete-product/${id}`, { withCredentials: true })
             document.getElementById(id).style.display = "none";
             // setProducts(products.filter(product => product._id !==id)); 
             alert("Product deleted successfully!");
@@ -83,7 +83,7 @@ export default function SellerProducts() {
                             <div key={index} className='product-card card' id={product._id}>
 
                                 <div>
-                                    <img src={`http://localhost:5000/${product.image}`} width="150" height="150" />
+                                    <img src={`https://easydeals-backend.onrender.com/${product.image}`} width="150" height="150" />
                                 </div>
                                 <div className='product-title'>
                                     {product.name}

@@ -15,7 +15,7 @@ function BuyerLogin() {
     e.preventDefault();
 
     try {
-      const res = await axios.post('http://localhost:5000/buyer/user/login', {
+      const res = await axios.post('https://easydeals-backend.onrender.com/buyer/user/login', {
         email, password
       }, { withCredentials: true })
       alert(res.data.message);

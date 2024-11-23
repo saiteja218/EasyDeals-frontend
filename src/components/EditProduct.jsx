@@ -36,7 +36,7 @@ export default function EditProduct() {
       setCategory(prod.category);
       setPrice(prod.price);
       setImage(prod.image); // This is only for preview; won't be re-uploaded if not modified
-      setImagePreview(`http://localhost:5000/${prod.image}`);
+      setImagePreview(`https://easydeals-backend.onrender.com/${prod.image}`);
     }
 
     // JWT token check for authentication
@@ -81,7 +81,7 @@ export default function EditProduct() {
 
     try {
         const res = await axios.patch(
-            `http://localhost:5000/seller/products/update-products/${prodId}`, 
+            `https://easydeals-backend.onrender.com/seller/products/update-products/${prodId}`, 
             formData, // Use formData here
             { headers: { 'Content-Type': 'multipart/form-data' } }
         );

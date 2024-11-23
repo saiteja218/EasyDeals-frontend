@@ -15,7 +15,7 @@ function BuyerSignup() {
         e.preventDefault();
         try {
           if(password==password2){
-            const res = await axios.post('http://localhost:5000/buyer/user/register', {
+            const res = await axios.post('https://easydeals-backend.onrender.com/buyer/user/register', {
                 name, email, password
             }, { withCredentials: true })
             alert("new user added");
