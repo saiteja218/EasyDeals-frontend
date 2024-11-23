@@ -19,8 +19,9 @@ function BuyerLogin() {
         email, password
       }, { withCredentials: true })
       alert(res.data.message);
-      navigate(`/buyerhome`)
-      console.log(res.data.id);
+      const buyerData=res.data.isemail
+      navigate(`/buyerhome`,{state:{buyerData}})
+      console.log(res.data.isemail.name);
 
     } catch (error) {
       // alert(error.response?.data.message);   

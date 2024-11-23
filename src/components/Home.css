@@ -93,3 +93,49 @@
 .form-content a{
     color: #1464c0;
 }
+
+
+.navbar{
+    background-color: #cd3838;
+    /* padding: rem; */
+
+}
+
+.navbar-left{
+    display: flex;
+    align-items: center;
+}
+
+.navbar-left img{
+    margin:0 1rem;
+}
+
+.navbar-left h2{
+    color: white;
+    font-size: 2.5rem;
+    
+}
+
+.navbar-right{
+    display: flex;
+    align-items: center;
+    margin: 0 1rem;
+}
+
+.navbar-right p{
+    color: white;
+    margin: 0 1rem;
+    font-size: large;
+    font-weight: 500;
+    font-family:cursive;
+}
+
+.navbar-right button{
+    border: none;
+    padding: 0.5rem 2rem;
+    font-weight: 600;
+    border-radius: 5px;
+    color: #1464c0;
+    background-color: white;
+    font-size: 16px;
+}

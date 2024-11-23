@@ -8,7 +8,7 @@
   }
   
   
-  .carousel-control-next, .carousel-control-prev {
+  /* .carousel-control-next, .carousel-control-prev {
     position: absolute;
     top: 0px;
     bottom: 10rem;
@@ -24,11 +24,9 @@
     border: 0;
     opacity: .5;
     transition: opacity .15s ease;
-  }
+  } */
   
-  .homeDiv{
-    padding-top: 10px;
-  }
+  
   
   .imgg{
     margin: 0;

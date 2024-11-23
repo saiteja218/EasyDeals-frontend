@@ -7,18 +7,23 @@ function BuyerSignup() {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [password2, setPassword2] = useState("");
     const navigate = useNavigate();
 
 
     async function handleSubmit(e) {
         e.preventDefault();
         try {
+          if(password==password2){
             const res = await axios.post('http://localhost:5000/buyer/user/register', {
                 name, email, password
             }, { withCredentials: true })
             alert("new user added");
             console.log(res);
-            navigate(`/buyerhome`)
+            navigate(`/buyerhome`,{state:{name:res.data.isemail}})
+          }else{
+            alert("passwords are not matching!")
+          }
 
 
         } catch (error) {
@@ -63,14 +68,24 @@ function BuyerSignup() {
 
             <input
               type="password"
-              placeholder='Password'
+              placeholder='Re-Enter Password'
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
             />
           </div>
+          <div>
+
+            <input
+              type="password"
+              placeholder='Password'
+              value={password}
+              onChange={(e) => setPassword2(e.target.value)}
+              required
+            />
+          </div>
           <button id='login-btn1' type="submit">Create Account</button>
-          <a href="" onClick={()=>{navigate("/buyer/signup")}}>Already have an account? Login here</a>
+          <a href="" onClick={()=>{navigate("/buyer/login")}}>Already have an account? Login here</a>
           
         </div>
         

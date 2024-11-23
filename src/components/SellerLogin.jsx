@@ -18,11 +18,11 @@ function SellerLogin(){
                 email,password
             },{withCredentials:true})
             alert(res.data.message);
-            navigate(`/sellerproducts/${res.data.id}`)
-            console.log(res.data.id);    
+            navigate(`/sellerproducts/${res.data.user._id}`,{state:{user :res.data.user}})
+            console.log(res.data.user);    
             
         } catch (error) {
-            // alert(error.response?.data.message);   
+            alert(error.response?.data.message);   
             console.log(error);
                   
          }

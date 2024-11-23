@@ -1,0 +1,106 @@
+/* General Styles for Cart Page */
+.main-cart {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 20px;
+    background-color: #f8f8f8;
+  }
+  
+  .left {
+    width: 60%;
+    /* padding-left: 1rem; */
+  }
+  
+  .right {
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    background-color: white;
+  }
+  
+  table th,
+  table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+  }
+  
+  table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+  }
+  
+  table td {
+    font-size: 14px;
+  }
+  
+  .table p {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  /* Cart Image */
+  .right img {
+    max-width: 100%;
+    height: auto;
+    /* margin-top: 20px; */
+  }
+  
+  /* Total Section Styling */
+  .left p {
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 20px;
+    font-style: italic;
+
+  }
+  
+  /* Adjusting table layout */
+  table thead th {
+    width: 40%;
+  }
+  
+  table tbody td {
+    width: 30%;
+  }
+  
+  /* Add some space around content */
+  .main-cart > div {
+    margin: 20px;
+  }
+  
+/* Simple styling for the Purchase button */
+.btn button {
+    width: 12rem;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    background-color: #4CAF50; /* Green */
+    color: white;
+    border: none;
+    border-radius: 3px; /* Slightly rounded corners */
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Smooth transition */
+  }
+  
+  .btn button:hover {
+    background-color: #45a049; /* Slightly darker green on hover */
+  }
+  
+  .btn button:focus {
+    outline: none; /* Remove focus outline */
+  }
+  
+  
+  
+  

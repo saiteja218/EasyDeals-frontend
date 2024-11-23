@@ -11,6 +11,9 @@ import BuyerLogin from './components/BuyerLogin';
 import BuyerHome from './components/BuyerHome';
 import BuyerSignup from './components/BuyerSignup';
 import AllProducts from './components/AllProducts';
+import EditProduct from './components/EditProduct';
+import Cart from './components/Cart';
+import Purchases from './components/Purchases';
 
 
 
@@ -24,6 +27,7 @@ function App() {
     <div>
 
       <Routes>
+        
         <Route path='/' element={<Home/>} />
         <Route path='/seller/login' element={<SellerLogin/>}/>
         <Route path='/seller/signup' element={<SellerSignup/>}/>
@@ -32,8 +36,11 @@ function App() {
         <Route path='/buyer/login' element={<BuyerLogin/>}/>
         <Route path='/buyer/signup' element={<BuyerSignup/>}/>
         <Route path='/buyerhome' element={<BuyerHome/>}/>  
-        <Route path='/products' element={<AllProducts/>}/>  
-
+        <Route path='/products' element={<AllProducts/>}/> 
+        <Route path='/edit-product' element={<EditProduct/>}/> 
+        <Route path='/cart' element={<Cart/>}/> 
+        <Route path='/purchases' element={<Purchases/>}/>
+        
       </Routes>
       
     </div>

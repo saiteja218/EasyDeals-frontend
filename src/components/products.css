@@ -1,0 +1,165 @@
+.seller-products-div{
+    /* background-color: #fdea60; */
+    height: 100vh;
+}
+
+#btn1{
+    border: none;
+    background-color: #1464c0;
+    color: white;
+    padding: 0.5rem 2rem;
+    border-radius: 15px;
+}
+
+.product-card, .card{
+    background-color: #fefeff;
+    width: 14vw;
+    /* margin: 5px; */
+    display: flex;
+    align-items: center;
+    padding: 15px 10px;
+    /* padding-bottom: 1.1rem; */
+}
+
+.products{
+    
+    /* display: flex; */
+    /* flex-direction:row; */
+    /* justify-content: space-between; */
+    display: grid;
+    grid-template-columns: repeat(auto-fill,minmax(210px,1fr));
+    flex-wrap: wrap ;
+    margin: 10px;
+
+}
+
+.btns{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.card img{
+    padding: 0.2rem;
+}
+
+.product-title{
+    font-weight: 500;
+
+}
+
+.product-price{
+    color: #0055ff;
+    font-weight: 500;
+    padding: 5px;
+}
+
+.btns button{
+    border: none;
+    color: white;
+    padding: 3px 16px;
+    border-radius: 10px;
+    margin: 5px 0;
+}
+
+.add-products-left{
+    width: 50vw;
+    background-color: aquamarine;
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+}
+
+#discount{
+    font-size: small;
+}
+.add-products-left form{
+   display: flex;
+   flex-direction: column;
+   width: 85%;
+   gap: 2rem;
+
+   
+}
+
+.add-products-left form input{
+    padding: 8px;
+    border-radius: 8px;
+    border: none;
+}
+
+.add-products-left form button{
+    width: 12vw;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 12px;
+    font-weight: 500;
+    color: white;
+    background-color: #1464c0;
+}
+.Add-products{
+    display: flex;
+
+}
+.add-products-right{
+    width: 50vw;
+    padding: 2rem 4rem;
+}
+.add-products-right h1{
+    font-style: italic;
+}
+
+.add-products-right .card{
+    width: 20vw;
+}
+#preview-btn{
+    border: none;
+    border-radius: 10px;
+    background-color: #1464c0;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 12px;
+    font-weight: 500;
+    width: 9vw;
+
+}
+
+.preview{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* align-items: center; */
+} 
+
+#preview-name{
+    font-size: 1.4rem;
+    font-weight: 500;
+    margin: 8px 5px;
+    padding: 0;
+}
+#preview-price{
+    color: #0055ff;
+    font-weight: 600;
+    
+}
+
+
+.price{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.price input{
+    width: 50%;
+    /* margin: 0.5rem; */
+}
+
+
+
+  
