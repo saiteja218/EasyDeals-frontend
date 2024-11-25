@@ -20,12 +20,7 @@ export default function EditProduct() {
   const location = useLocation();
   const { user, prod } = location.state || {};
 
-  useEffect(() => {
-    const token = Cookies.get("jwt");
-    if (!token) {
-      navigate('/');
-    }
-  }, [navigate]);
+  
   useEffect(() => {
     // Populate form data if product details (prod) are passed in
     if (prod) {
@@ -38,13 +33,10 @@ export default function EditProduct() {
       setImage(prod.image); // This is only for preview; won't be re-uploaded if not modified
       setImagePreview(`https://easydeals-backend.onrender.com/${prod.image}`);
     }
+})
 
     // JWT token check for authentication
-    const token = Cookies.get('jwt');
-    if (!token) {
-      navigate('/');
-    }
-  }, [navigate, prod]);
+   
 
   function handleImageChange(e) {
     const file = e.target.files[0];

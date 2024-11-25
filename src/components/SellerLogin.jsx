@@ -19,7 +19,7 @@ function SellerLogin(){
             },{withCredentials:true})
             alert(res.data.message);
             navigate(`/sellerproducts/${res.data.user._id}`,{state:{user :res.data.user}})
-            console.log(res.data.user);    
+            // console.log(res.data.user);    
             
         } catch (error) {
             alert(error.response?.data.message);   

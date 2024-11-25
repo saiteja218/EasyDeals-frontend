@@ -41,7 +41,7 @@ export default function Cart() {
     async function order() {
         try {
             const ids= products.map(product=>product.objectID)
-            const saveOrder = await axios.post("http://localhost:5000/buyer/user/set-order", {
+            const saveOrder = await axios.post("https://easydeals-backend.onrender.com/buyer/user/set-order", {
                 products:ids,customer:buyerData._id,totalAmount:sum
             }, { withCredentials: true })
             alert(saveOrder.data.message)

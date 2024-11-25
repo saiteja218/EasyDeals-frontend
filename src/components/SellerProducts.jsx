@@ -14,19 +14,19 @@ export default function SellerProducts() {
 
 
 
-    useEffect(() => {
-        const token = Cookies.get("jwt");
-        if (!token) { 
-            navigate('/');
-        }
-    }, [navigate])
+    // useEffect(() => {
+    //     const token = Cookies.get("jwt");
+    //     if (!token) { 
+    //         navigate('/');
+    //     }
+    // }, [navigate])
     // console.log(id)
     useEffect(() => {
         async function getproducts() {
             let productdata = await axios.get(`https://easydeals-backend.onrender.com/seller/products/get-seller-products/${id}`, { withCredentials: true });
             // data-data.data;
             // console.log(productdata.data.sellerProducts);
-
+            console.log(user)
             setProducts(productdata.data.sellerProducts)
             // console.log(user)
 

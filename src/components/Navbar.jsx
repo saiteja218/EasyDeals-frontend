@@ -5,12 +5,12 @@ import { useNavigate } from 'react-router-dom'
 import Cookies from 'js-cookie';
 export default function Navbar({name}) {
     const navigate=useNavigate();
-    useEffect(() => {
-        const token = Cookies.get("jwt");
-        if (!token) { 
-            navigate('/');
-        }
-    }, [navigate])
+    // useEffect(() => {
+    //     const token = Cookies.get("jwt");
+    //     if (!token) { 
+    //         navigate('/');
+    //     }
+    // }, [navigate])
    
 
      // Function to handle logout

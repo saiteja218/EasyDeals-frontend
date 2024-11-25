@@ -7,12 +7,12 @@ import Cookies from 'js-cookie';
 export default function Navbar2({ data }) {
     const navigate = useNavigate();
 
-    useEffect(() => {
-        const token = Cookies.get("jwt");
-        if (!token) { 
-            navigate('/');
-        }
-    }, [navigate]);
+    // useEffect(() => {
+    //     const token = Cookies.get("jwt");
+    //     if (!token) { 
+    //         navigate('/');
+    //     }
+    // }, [navigate]);
 
     // Function to handle logout
     const handleLogout = () => {

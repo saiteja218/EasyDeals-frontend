@@ -24,12 +24,12 @@ export default function AllProducts() {
   const [cartVisible, setCartVisible] = useState(false);
 
 
-  useEffect(() => {
-    const token = Cookies.get("jwt");
-    if (!token) {
-      navigate('/');
-    }
-  }, [navigate]);
+  // useEffect(() => {
+  //   const token = Cookies.get("jwt");
+  //   if (!token) {
+  //     navigate('/');
+  //   }
+  // }, [navigate]);
   useEffect(() => {
     async function getProd() {
       try {

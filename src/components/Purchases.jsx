@@ -15,12 +15,12 @@ export default function Purchases() {
     const [orders, setOrders] = useState([]);
     const [productsMap, setProductsMap] = useState({});
 
-    useEffect(() => {
-        const token = Cookies.get("jwt");
-        if (!token) {
-          navigate('/');
-        }
-      }, [navigate]);
+    // useEffect(() => {
+    //     const token = Cookies.get("jwt");
+    //     if (!token) {
+    //       navigate('/');
+    //     }
+    //   }, [navigate]);
 
     useEffect(() => {
         async function getData() {

@@ -20,8 +20,11 @@ function BuyerLogin() {
       }, { withCredentials: true })
       alert(res.data.message);
       const buyerData=res.data.isemail
-      navigate(`/buyerhome`,{state:{buyerData}})
-      console.log(res.data.isemail.name);
+      console.log(buyerData);
+      // navigate(`/buyerhome`,{state:{buyerData}})
+      localStorage.setItem('buyerData', JSON.stringify(buyerData));
+      navigate(`/buyerhome`)
+      // console.log(res.data.isemail.name);
 
     } catch (error) {
       // alert(error.response?.data.message);   
