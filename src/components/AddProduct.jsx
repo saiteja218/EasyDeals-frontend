@@ -20,12 +20,12 @@ export default function AddProduct() {
   const location = useLocation();
   const { user } = location.state || {};
 
-  useEffect(() => {
-    const token = Cookies.get("jwt");
-    if (!token) {
-      navigate('/');
-    }
-  }, [navigate]);
+  // useEffect(() => {
+  //   const token = Cookies.get("jwt");
+  //   if (!token) {
+  //     navigate('/');
+  //   }
+  // }, [navigate]);
 
   function handleImageChange(e) {
     const file = e.target.files[0];

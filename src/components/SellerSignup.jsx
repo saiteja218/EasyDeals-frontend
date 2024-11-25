@@ -19,7 +19,7 @@ function SellerSignup() {
             }, { withCredentials: true })
             alert("new user added");
             console.log(res.data.newSeller._id);
-            navigate(`/sellerproducts/${res.data.newSeller._id}`)
+            navigate(`/sellerproducts/${res.data.newSeller._id}`,{state:{user :res.data.user}})
 
 
         } catch (error) {
