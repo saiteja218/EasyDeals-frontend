@@ -68,7 +68,7 @@ function BuyerSignup() {
 
             <input
               type="password"
-              placeholder='Re-Enter Password'
+              placeholder='Password'
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
@@ -78,8 +78,8 @@ function BuyerSignup() {
 
             <input
               type="password"
-              placeholder='Password'
-              value={password}
+              placeholder='Re-enter Password'
+              value={password2}
               onChange={(e) => setPassword2(e.target.value)}
               required
             />

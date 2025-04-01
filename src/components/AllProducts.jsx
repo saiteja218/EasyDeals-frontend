@@ -33,22 +33,23 @@ export default function AllProducts() {
   useEffect(() => {
     async function getProd() {
       try {
-        // const response = await axios.get("http://localhost:5000/seller/products/get-products");
+        const response = await axios.get("https://easydeals-backend.onrender.com/seller/products/get-products");
 
-        // setProducts(response.data.data); 
-        let hits = [];
-        let page = 0;
-        let totalPages = 1;
-        while (page < totalPages) {
-          const response = await index.search('', {
-            page,
-            hitsPerPage: 1000,
-          })
-          hits = [...hits, ...response.hits];
-          totalPages = response.nbPages;
-          page++
-        }
-        setProducts(hits)
+        setProducts(response.data.data); 
+        // let hits = [];
+        // let page = 0;
+        // let totalPages = 1;
+        // while (page < totalPages) {
+        //   const response = await index.search('', {
+        //     page,
+        //     hitsPerPage: 1000,
+        //   })
+        //   hits = [...hits, ...response.hits];
+        //   totalPages = response.nbPages;
+        //   page++
+        // }
+        // console.log(hits)
+        // setProducts(hits)
 
       } catch (error) {
         console.error("Error fetching products:", error);
@@ -56,7 +57,7 @@ export default function AllProducts() {
 
       try {
         const response = await axios.get("https://easydeals-backend.onrender.com/seller/products/get-categories");
-        // console.log(response.data.categories)
+        console.log(response.data.categories)
 
         setCategories(response.data.categories)
         // console.log(categories)
@@ -104,66 +105,50 @@ export default function AllProducts() {
 
 
   async function handleFilter() {
-    try {
-      let filteredConditions = [];
-      if (min) {
-        filteredConditions.push(`price>=${min}`)
-      }
-      if (min) {
-        filteredConditions.push(`price<=${max}`)
-      }
-
-      if (selectCategory) {
-        filteredConditions.push(`category:${selectCategory}`)
-      }
-
-      let filters = filteredConditions.join(" AND ");
-
-      console.log(filters);
-
-
-
-      let resp = await index.search("", {
-        filters,
-        hitsPerPage: 1000,
-
-      })
-      let sortedProducts = resp.hits;
-
-      // Apply sorting locally based on sortOption
-      switch (sortOption) {
-        case "price":
-          sortedProducts.sort((a, b) => a.price - b.price);
-          break;
-        case "discount":
-          sortedProducts.sort((a, b) => b.discount - a.discount);
-          break;
-        case "a-to-z":
-          sortedProducts.sort((a, b) => a.name.localeCompare(b.name));
-          break;
-        case "z-to-a":
-          sortedProducts.sort((a, b) => b.name.localeCompare(a.name));
-          break;
-        default:
-          break; // No sorting
-      }
-
-      // Update the products state
-      setProducts(sortedProducts);
-
-    } catch (error) {
-      console.error("Error applying filters:", error);
+    let filteredProducts = products; // Use the already fetched products
+  
+    // Apply filters
+    if (min) {
+      filteredProducts = filteredProducts.filter(product => product.price >= min);
     }
-
+    if (max) {
+      filteredProducts = filteredProducts.filter(product => product.price <= max);
+    }
+    if (selectCategory) {
+      filteredProducts = filteredProducts.filter(product => product.category === selectCategory);
+    }
+  
+    // Apply sorting
+    switch (sortOption) {
+      case "price":
+        filteredProducts.sort((a, b) => a.price - b.price);
+        break;
+      case "discount":
+        filteredProducts.sort((a, b) => b.discount - a.discount);
+        break;
+      case "a-to-z":
+        filteredProducts.sort((a, b) => a.name.localeCompare(b.name));
+        break;
+      case "z-to-a":
+        filteredProducts.sort((a, b) => b.name.localeCompare(a.name));
+        break;
+      default:
+        break;
+    }
+  
+    setProducts([...filteredProducts]); // Update state
   }
-
-  function handleReset() {
-    setMin(0);
-    setMax(0);
+  
+  async function handleReset() {
+    setMin("");
+    setMax("");
     setSelectCategory("");
-    setSortOption("")
-    handleFilter();
+    setSortOption("");
+    const response = await axios.get("https://easydeals-backend.onrender.com/seller/products/get-products");
+
+    setProducts(response.data.data); ; // Reset to original product list
   }
+  
 
 
 
