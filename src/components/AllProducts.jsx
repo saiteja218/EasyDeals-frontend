@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 const client = algoliasearch('VQ3KJTIQVD', '7d7685118964f54246dfe39c99e02615');
 const index = client.initIndex('products');
+import { axiosInstance } from '../lib/axios.js';
 
 export default function AllProducts() {
   const [products, setProducts] = useState([]);
@@ -33,9 +34,10 @@ export default function AllProducts() {
   useEffect(() => {
     async function getProd() {
       try {
-        const response = await axios.get("https://easydeals-backend.onrender.com/seller/products/get-products");
+        const response = await axiosInstance.get("seller/products/get-products");
 
-        setProducts(response.data.data); 
+        setProducts(response.data.data);
+        console.log(response.data.data)
         // let hits = [];
         // let page = 0;
         // let totalPages = 1;
@@ -56,7 +58,7 @@ export default function AllProducts() {
       }
 
       try {
-        const response = await axios.get("https://easydeals-backend.onrender.com/seller/products/get-categories");
+        const response = await axiosInstance.get("seller/products/get-categories");
         console.log(response.data.categories)
 
         setCategories(response.data.categories)
@@ -73,6 +75,7 @@ export default function AllProducts() {
   function handleUpdate(id) {
     if (!cart.includes(id)) {
       addProducts((prev) => [...prev, id]);
+      // console.log(id)
       // console.log("Added to cart:", id);
     }
   }
@@ -106,7 +109,7 @@ export default function AllProducts() {
 
   async function handleFilter() {
     let filteredProducts = products; // Use the already fetched products
-  
+
     // Apply filters
     if (min) {
       filteredProducts = filteredProducts.filter(product => product.price >= min);
@@ -117,7 +120,7 @@ export default function AllProducts() {
     if (selectCategory) {
       filteredProducts = filteredProducts.filter(product => product.category === selectCategory);
     }
-  
+
     // Apply sorting
     switch (sortOption) {
       case "price":
@@ -135,20 +138,20 @@ export default function AllProducts() {
       default:
         break;
     }
-  
+
     setProducts([...filteredProducts]); // Update state
   }
-  
+
   async function handleReset() {
     setMin("");
     setMax("");
     setSelectCategory("");
     setSortOption("");
-    const response = await axios.get("https://easydeals-backend.onrender.com/seller/products/get-products");
+    const response = await axiosInstance.get("seller/products/get-products");
 
-    setProducts(response.data.data); ; // Reset to original product list
+    setProducts(response.data.data);; // Reset to original product list
   }
-  
+
 
 
 
@@ -230,11 +233,11 @@ export default function AllProducts() {
           </div>
 
 
-          {cartVisible &&<div className="btn3">
+          {cartVisible && <div className="btn3">
             <button
               onClick={() => {
                 if (cart.length > 0) {
-                  navigate('/cart', { state: { cart,buyerData} });
+                  navigate('/cart', { state: { cart, buyerData } });
                 } else {
                   alert("Your cart is empty!");
                 }
@@ -257,15 +260,21 @@ export default function AllProducts() {
         <div className='all-products'>
           <div className='prods '>
             {/* hello */}
-            {products?
+            {products ?
               products.map((product, index) => {
-                
-                const isInCart = cart.includes(product.objectID);
+
+                const isInCart = cart.includes(product._id);
                 // console.log(cart.length)
                 return (
                   <div className='product-card card' key={index}>
                     <div>
-                      <img src={`https://easydeals-backend.onrender.com/${product.image}`} width="150" height="150" />
+                      <img
+                        src={product.image.startsWith("http") ? product.image : `https://easydeals-backend.onrender.com/${product.image}`}
+                        width="150"
+                        height="150"
+                        alt={product.name}
+                      />
+
                     </div>
                     <div className='product-title'>
                       {product.name}
@@ -275,16 +284,16 @@ export default function AllProducts() {
                     </div>
                     <div className='btns'>
                       <div className='btn0' style={{ display: isInCart ? "none" : "block" }}>
-                        <button style={{ backgroundColor: "#1464c0" }} onClick={(e) => handleUpdate(product.objectID)}>Add to Cart</button>
+                        <button style={{ backgroundColor: "#1464c0" }} onClick={(e) => handleUpdate(product._id)}>Add to Cart</button>
                       </div>
                       <div className='btn1' style={{ display: isInCart ? "block" : "none" }}>
-                        <button style={{ backgroundColor: "#cd3838" }} onClick={(e) => handleRemove(product.objectID)}>Remove Item</button>
+                        <button style={{ backgroundColor: "#cd3838" }} onClick={(e) => handleRemove(product._id)}>Remove Item</button>
                       </div>
 
                     </div>
                   </div>
                 )
-              }):<p>Loading...</p>
+              }) : <p>Loading...</p>
             }
           </div>
         </div>

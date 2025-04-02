@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import left from '../assets/1-1.jpg'
 import "./Home.css"
+import { axiosInstance } from '../lib/axios.js';
 
 
 function BuyerLogin() {
@@ -15,7 +16,7 @@ function BuyerLogin() {
     e.preventDefault();
 
     try {
-      const res = await axios.post('https://easydeals-backend.onrender.com/buyer/user/login', {
+      const res = await axiosInstance.post('buyer/user/login', {
         email, password
       }, { withCredentials: true })
       alert(res.data.message);

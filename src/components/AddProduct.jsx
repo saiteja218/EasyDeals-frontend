@@ -4,6 +4,7 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import Navbar from './Navbar';
 import './products.css';
+import { axiosInstance } from '../lib/axios.js';
 
 
 export default function AddProduct() {
@@ -29,28 +30,38 @@ export default function AddProduct() {
 
   function handleImageChange(e) {
     const file = e.target.files[0];
-    setImage(file);
-    setImagePreview(URL.createObjectURL(file)); // Set preview URL
+    if(!file.type.startsWith('image/')){
+      alert('Please select an image file');
+      return;
+  }
+  const reader = new FileReader();
+  reader.onloadend = () => {
+      setImagePreview(reader.result);
+      setImage(reader.result); // Store the file for form submission
+  };
+  reader.readAsDataURL(file); 
   }
 
   async function handleSubmit(e) {
     e.preventDefault();
 
-    const formData = new FormData();
-    formData.append('name', name);
-    formData.append('description', description);
-    formData.append('price', price);
-    formData.append('discount', discount);
-    formData.append('category', category);
-    formData.append('image', image);
-    formData.append('seller', id);
+    const productData = {
+      name,
+      description,
+      price,
+      discount,
+      category,
+      image,  // This is the Base64-encoded string
+      seller: id
+  };
 
-    try {
-      const res = await axios.post('https://easydeals-backend.onrender.com/seller/products/add-products', formData, {
-        headers: { 'Content-Type': 'multipart/form-data' },
-        withCredentials: true,
+  console.log("Submitting product data:", productData); // Debugging
+
+  try {
+      const res = await axiosInstance.post('seller/products/add-products', productData, {
+          headers: { 'Content-Type': 'application/json' },
+          withCredentials: true,
       });
-
       alert("Product added successfully!");
       navigate(`/sellerproducts/${id}`,{state:{user}});
     } catch (error) {

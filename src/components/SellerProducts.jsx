@@ -4,6 +4,7 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 import Navbar from './Navbar';
 import "./products.css"
+import { axiosInstance } from '../lib/axios.js';
 
 export default function SellerProducts() {
     const { id } = useParams();
@@ -23,7 +24,7 @@ export default function SellerProducts() {
     // console.log(id)
     useEffect(() => {
         async function getproducts() {
-            let productdata = await axios.get(`https://easydeals-backend.onrender.com/seller/products/get-seller-products/${id}`, { withCredentials: true });
+            let productdata = await axiosInstance.get(`seller/products/get-seller-products/${id}`, { withCredentials: true });
             // data-data.data;
             // console.log(productdata.data.sellerProducts);
             console.log(user)
@@ -41,7 +42,7 @@ export default function SellerProducts() {
     async function handleDelete(id) {
 
         try {
-            await axios.delete(`https://easydeals-backend.onrender.com/seller/products/delete-product/${id}`, { withCredentials: true })
+            await axiosInstance.delete(`seller/products/delete-product/${id}`, { withCredentials: true })
             document.getElementById(id).style.display = "none";
             // setProducts(products.filter(product => product._id !==id)); 
             alert("Product deleted successfully!");
@@ -54,10 +55,10 @@ export default function SellerProducts() {
 
     function handleUpdate(id) {
         try {
-            const prod=products.find(p=>p._id==id);
-            navigate('/edit-product',{state:{user,prod}})
+            const prod = products.find(p => p._id == id);
+            navigate('/edit-product', { state: { user, prod } })
         } catch (error) {
-            
+
         }
 
     }
@@ -83,7 +84,13 @@ export default function SellerProducts() {
                             <div key={index} className='product-card card' id={product._id}>
 
                                 <div>
-                                    <img src={`https://easydeals-backend.onrender.com/${product.image}`} width="150" height="150" />
+                                    <img
+                                        src={product.image.startsWith("http") ? product.image : `https://easydeals-backend.onrender.com/${product.image}`}
+                                        width="150"
+                                        height="150"
+                                        alt={product.name}
+                                    />
+
                                 </div>
                                 <div className='product-title'>
                                     {product.name}

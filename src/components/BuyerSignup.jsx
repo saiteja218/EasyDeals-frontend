@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import left from '../assets/1-1.jpg'
+import { axiosInstance } from '../lib/axios.js';
 
 function BuyerSignup() {
     const [name, setName] = useState("");
@@ -15,7 +16,7 @@ function BuyerSignup() {
         e.preventDefault();
         try {
           if(password==password2){
-            const res = await axios.post('https://easydeals-backend.onrender.com/buyer/user/register', {
+            const res = await axiosInstance.post('buyer/user/register', {
                 name, email, password
             }, { withCredentials: true })
             alert("new user added");

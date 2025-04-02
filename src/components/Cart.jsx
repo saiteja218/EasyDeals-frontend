@@ -1,53 +1,58 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios"
 import { useLocation, useNavigate } from "react-router-dom";
-import algoliasearch from "algoliasearch";
-const client = algoliasearch('VQ3KJTIQVD', '7d7685118964f54246dfe39c99e02615');
-const index = client.initIndex('products');
-import cartimg from '../assets/cart.png'
 import Navbar from "./Navbar2";
-import './cart.css'
-import Orders from "./Orders";
+import cartimg from "../assets/cart.png";
+import "./cart.css";
+import { axiosInstance } from "../lib/axios.js";
 
 export default function Cart() {
-    const location = useLocation()
+    const location = useLocation();
     const { cart, buyerData } = location.state;
     const [products, setProducts] = useState([]);
     const [sum, setSum] = useState(0);
-    const navigate=useNavigate()
+    const navigate = useNavigate();
+
     useEffect(() => {
         async function getprods() {
             try {
-                // console.log("prods")
-                const response = await index.getObjects(cart);
-                setProducts(response.results);
-                console.log(products)
+                const response = await axiosInstance.post("buyer/user/cart/get-products", { productIds: cart });
+                // console.log(response);
+                if (response.data && Array.isArray(response.data.products)) {
+                    setProducts(response.data.products);
+                } else {
+                    setProducts([]);
+                }
+                // console.log(products)
             } catch (error) {
                 console.error("Error fetching cart products:", error);
+                setProducts([]);
             }
-
         }
-        getprods();
-    }, [cart])
+        
+        if (cart && cart.length > 0) {
+            getprods();
+        }
+    }, [cart]);
 
     useEffect(() => {
-        let total = 0;
-        products.forEach(product => {
-            total += product.price;
-        });
+        const total = products.reduce((acc, product) => acc + Number(product.price || 0), 0);
         setSum(total);
     }, [products]);
+    
 
     async function order() {
         try {
-            const ids= products.map(product=>product.objectID)
-            const saveOrder = await axios.post("https://easydeals-backend.onrender.com/buyer/user/set-order", {
-                products:ids,customer:buyerData._id,totalAmount:sum
-            }, { withCredentials: true })
-            alert(saveOrder.data.message)
-            navigate('/purchases',{state:{buyerData}})
+            const ids = products.map(product => product._id);
+            const saveOrder = await axiosInstance.post("buyer/user/set-order", {
+                products: ids,
+                customer: buyerData._id,
+                totalAmount: sum
+            }, { withCredentials: true });
+
+            alert(saveOrder.data.message);
+            navigate("/purchases", { state: { buyerData } });
         } catch (error) {
-            console.error("error saving order:(",error);
+            console.error("Error saving order:", error);
         }
     }
 
@@ -62,43 +67,39 @@ export default function Cart() {
                             <thead>
                                 <tr>
                                     <th>Product Name</th>
-                                    <th>Quaintity</th>
+                                    <th>Quantity</th>
                                     <th>Price</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {
-
-                                    products.map((product, index) => {
-                                        // setSum(sum+product.price)
-                                        return (
-                                            <tr key={index}>
-                                                <td>{product.name}</td>
-                                                <td>1</td>
-                                                <td>{product.price}</td>
-                                            </tr>
-                                        )
-                                    })
-                                }
+                                {products.length > 0 ? (
+                                    products.map((product, index) => (
+                                        <tr key={index}>
+                                            <td>{product.name}</td>
+                                            <td>1</td>
+                                            <td>{product.price}</td>
+                                        </tr>
+                                    ))
+                                ) : (
+                                    <tr>
+                                        <td colSpan="3">No products in cart</td>
+                                    </tr>
+                                )}
                                 <tr>
                                     <td>Total</td>
                                     <td>{products.length}</td>
                                     <td>{sum}</td>
                                 </tr>
                             </tbody>
-
                         </table>
                     </div>
-
                     <div className="btn">
-                        <button onClick={order}>Purchase</button>
+                        <button onClick={order} disabled={products.length === 0}>Purchase</button>
                     </div>
                 </div>
-                <div className="right">
-
-                </div>
+                <div className="right"></div>
                 <img src={cartimg} alt="cart" height={600} width={600} />
             </div>
         </>
-    )
+    );
 }

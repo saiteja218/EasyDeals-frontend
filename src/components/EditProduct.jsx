@@ -4,6 +4,7 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import Navbar from './Navbar';
 import './products.css';
+import {axiosInstance} from "../lib/axios.js";
 
 export default function EditProduct() {
   const [name, setName] = useState('');
@@ -72,8 +73,8 @@ export default function EditProduct() {
     }
 
     try {
-        const res = await axios.patch(
-            `https://easydeals-backend.onrender.com/seller/products/update-products/${prodId}`, 
+        const res = await axiosInstance.patch(
+            `products/update-products/${prodId}`, 
             formData, // Use formData here
             { headers: { 'Content-Type': 'multipart/form-data' } }
         );

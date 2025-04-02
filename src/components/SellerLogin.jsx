@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import right from '../assets/1-2.jpg'
 import "./signup.css"
-
+import { axiosInstance } from '../lib/axios.js';
 function SellerLogin(){
     const [email,setEmail]=useState("");
     const [password,setPassword]=useState("");
@@ -14,7 +14,7 @@ function SellerLogin(){
       e.preventDefault();
         
         try {
-            const res= await axios.post('https://easydeals-backend.onrender.com/seller/user/login',{
+            const res= await axiosInstance.post('seller/user/login',{
                 email,password
             },{withCredentials:true})
             alert(res.data.message);
